@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>聚码搜（RepoTrove）· 开源项目聚合搜索</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css?v=2" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <span class="brand-mark"><i data-lucide="orbit"></i></span>
+          <span>聚码搜 <small>RepoTrove</small></span>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="historyButton" title="搜索历史">
+            <i data-lucide="history"></i>
+          </button>
+          <button class="button button-secondary" id="configButton">
+            <i data-lucide="settings"></i>
+            <span>接口状态</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="search-panel" aria-label="搜索">
+        <h1 class="search-title">开源项目聚合搜索</h1>
+        <p class="search-subtitle">GitHub · Gitee · GitCode · GitLab</p>
+
+        <div class="ai-banner" id="aiBanner" hidden>
+          <i data-lucide="sparkles"></i>
+          <span id="aiBannerText">AI 未配置 · 本地降级模式</span>
+          <button class="button button-secondary button-small" id="aiBannerButton">
+            <i data-lucide="settings"></i>
+            <span>配置</span>
+          </button>
+        </div>
+
+        <form class="search-box" id="searchForm">
+          <div class="search-input-wrap">
+            <i data-lucide="sparkles" class="search-icon"></i>
+            <textarea
+              id="queryInput"
+              rows="1"
+              placeholder="例如：帮我找一个考试系统"
+              aria-label="搜索需求"
+            ></textarea>
+          </div>
+          <div class="search-actions">
+            <label class="switch" id="aiSwitchLabel">
+              <input type="checkbox" id="aiToggle" />
+              <span class="switch-track"></span>
+              <span class="switch-text">AI 增强</span>
+            </label>
+            <button type="button" class="button button-ghost" id="clearButton">
+              <i data-lucide="eraser"></i>
+              <span>清空</span>
+            </button>
+            <button type="submit" class="button button-primary" id="searchButton">
+              <i data-lucide="search"></i>
+              <span>搜索</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="example-row" id="exampleRow">
+          <button class="chip" data-example="帮我找一个考试系统">考试系统</button>
+          <button class="chip" data-example="帮我找一个低代码平台">低代码平台</button>
+          <button class="chip" data-example="帮我找一个博客系统">博客系统</button>
+          <button class="chip" data-example="帮我找一个数据可视化项目">数据可视化</button>
+        </div>
+      </section>
+
+      <section class="workspace" id="workspace" hidden>
+        <aside class="side-panel">
+          <div class="panel-block">
+            <h2>搜索扩展</h2>
+            <p class="panel-meta" id="expansionMeta"></p>
+            <div class="chips" id="expansionChips"></div>
+          </div>
+
+          <div class="panel-block">
+            <h2>推荐项目</h2>
+            <div id="recommendations"></div>
+          </div>
+        </aside>
+
+        <section class="results-panel" aria-label="搜索结果">
+          <div class="results-head">
+            <div class="segmented" id="providerTabs" role="tablist"></div>
+            <div class="filters">
+              <label class="filter-check">
+                <input type="checkbox" id="aiFitOnly" />
+                <span>仅 AI 契合</span>
+              </label>
+              <select id="sortSelect" aria-label="排序">
+                <option value="default">综合排序</option>
+                <option value="stars">Star 最多</option>
+                <option value="updated">最近更新</option>
+                <option value="name">名称排序</option>
+              </select>
+              <select id="starsSelect" aria-label="Star 筛选">
+                <option value="0">不限 Star</option>
+                <option value="100">100+ Star</option>
+                <option value="1000">1k+ Star</option>
+                <option value="5000">5k+ Star</option>
+              </select>
+              <select id="languageSelect" aria-label="语言筛选">
+                <option value="all">全部语言</option>
+              </select>
+            </div>
+          </div>
+          <div class="results-list" id="resultsList"></div>
+        </section>
+      </section>
+    </main>
+
+    <dialog class="dialog" id="configDialog">
+      <div class="dialog-head">
+        <h2>接口状态</h2>
+        <button class="icon-button dialog-close" title="关闭">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="dialog-body" id="configBody"></div>
+    </dialog>
+
+    <dialog class="dialog" id="historyDialog">
+      <div class="dialog-head">
+        <h2>搜索历史</h2>
+        <button class="icon-button dialog-close" title="关闭">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="dialog-body" id="historyBody"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="/vendor/lucide.min.js"></script>
+    <script src="/app.js?v=2"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "repotrove",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "聚码搜（RepoTrove）- 自然语言聚合搜索 GitHub / Gitee / GitCode / GitLab 开源项目",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "dev": "node --watch --env-file-if-exists=.env server/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
